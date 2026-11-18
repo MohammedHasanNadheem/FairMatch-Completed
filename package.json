@@ -1,0 +1,32 @@
+{
+  "name": "fairmatch-platform",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:web": "npm --workspace @fairmatch/web run dev",
+    "dev:local": "tsx scripts/local-dev-server.ts",
+    "dev:api": "npm --workspace @fairmatch/api run dev",
+    "start:railway": "npm exec --workspace @fairmatch/api -- tsx ../../server/railway-server.ts",
+    "build": "npm run build --workspaces",
+    "typecheck:api": "tsc --project tsconfig.api.json",
+    "bootstrap:platform-admin": "node scripts/bootstrap-platform-admin.mjs",
+    "migrate:mysql": "node scripts/apply-mysql-migrations.mjs",
+    "seed:portals": "node scripts/seed-all-portals.mjs",
+    "test": "npm run test --workspaces",
+    "verify:launch": "node scripts/verify-launch.mjs",
+    "verify:roles": "node scripts/verify-roles.mjs",
+    "verify:roles:provisioned": "node scripts/verify-role-matrix.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "jose": "^6.2.12",
+    "mysql2": "^3.24.4"
+  }
+}

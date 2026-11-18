@@ -1,0 +1,7 @@
+node_modules/
+.npm-deploy-cache/
+.vercel/
+apps/web/dist/
+vercel-cli-status.log
+vercel-cli-status.error.log
+scripts/railway-predeploy.graphql

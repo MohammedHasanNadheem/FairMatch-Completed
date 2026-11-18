@@ -1,0 +1,9 @@
+{
+  "name": "@fairmatch/contracts",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "exports": "./src/index.ts",
+  "scripts": { "build": "tsc --noEmit --target ES2022 --module NodeNext --moduleResolution NodeNext src/index.ts", "test": "node --test test/*.test.js" },
+  "dependencies": { "zod": "^3.24.2" }
+}

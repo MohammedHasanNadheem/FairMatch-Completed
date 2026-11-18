@@ -1,0 +1,46 @@
+name: FairMatch quality gates
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      verify_production:
+        description: Run live production launch checks
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+
+  verify-production:
+    if: github.event_name == 'workflow_dispatch' && inputs.verify_production
+    needs: test-and-build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm run verify:launch
+        env:
+          FAIRMATCH_PRODUCTION_URL: ${{ vars.FAIRMATCH_PRODUCTION_URL }}
+          SUPABASE_URL: ${{ vars.SUPABASE_URL }}
+          SUPABASE_PUBLISHABLE_KEY: ${{ secrets.SUPABASE_PUBLISHABLE_KEY }}

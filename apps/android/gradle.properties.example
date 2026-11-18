@@ -1,0 +1,3 @@
+# Copy this file to ~/.gradle/gradle.properties or a local (untracked) gradle.properties.
+# Only the public Vercel API URL belongs here. Never add a MySQL password, JWT secret or AI API key.
+FAIRMATCH_API_BASE_URL=https://your-fairmatch-domain.vercel.app

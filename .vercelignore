@@ -1,0 +1,12 @@
+# The public Vercel Hobby deployment is an interactive product demo only.
+# Keep the MySQL API source in the repository for local and future managed
+# production deployment, but do not package its many serverless routes here.
+api/**
+server/**
+database/**
+apps/android/**
+supabase/**
+docs/**
+scripts/**
+*.log
+.npm-deploy-cache/**
